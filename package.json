@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1", 
-    "dev": "webpack seve --open --config webpack.dev.js", 
+    "dev": "webpack serve --open --config webpack.dev.js", 
     "build": "webpack --config webpack.prod.js", 
     "build:dev": "webpack --config webpack.dev.js", 
     "predeploy": "npm run build", 
