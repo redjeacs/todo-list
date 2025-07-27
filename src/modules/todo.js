@@ -1,37 +1,38 @@
 export default class ToDo {
   constructor(title, description, dueDate, priority) {
-    this.title = title;
-    this.description = description;
-    this.dueDate = dueDate;
-    this.priority = priority;
+    this._title = title;
+    this._description = description;
+    this._dueDate = dueDate;
+    this._priority = priority;
     this.id = crypto.randomUUID();
+
   }
 
   get title() {
-    return this.title;
+    return this._title;
   }
   set title(newTitle) {
-    this.title = newTitle;
+    this._title = newTitle;
   }
 
   get description() {
-    return this.description;
+    return this._description;
   }
   set description(newDescription) {
-    this.description = newDescription;
+    this._description = newDescription;
   }
 
   get dueDate() {
-    return this.dueDate;
+    return this._dueDate;
   }
   set dueDate(newDueDate) {
-    this.dueDate = newDueDate;
+    this._dueDate = newDueDate;
   }
 
   get priority() {
-    return this.priority;
+    return this._priority;
   }
   set priority(newPriority) {
-    this.priority = newPriority;
+    this._priority = newPriority;
   }
 }
