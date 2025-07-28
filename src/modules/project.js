@@ -1,20 +1,20 @@
-import ToDo from "./todo";
+import Todo from "./todo";
 
 export default class Project {
   constructor (title) {
     this.title = title;
     this.projectId = crypto.randomUUID();
-    this.toDoList = [];
+    this.todoList = [];
   }
   
-  addToDo (title, description, dueDate, priority) {
-    this.toDoList.push(new ToDo(title, description, dueDate, priority))
+  addTodo (title, description, dueDate, priority) {
+    this.todoList.push(new Todo(title, description, dueDate, priority))
   }
 
-  removeToDo (id) {
-    let toDoIndex = this.toDoList.findIndex(toDo => toDo.id === id);
-    if (toDoIndex !== -1) {
-      this.toDoList.splice(toDoIndex, 1);
+  removeTodo (id) {
+    let todoIndex = this.todoList.findIndex(todo => todo.id === id);
+    if (todoIndex !== -1) {
+      this.todoList.splice(todoIndex, 1);
     }
   }
 }
