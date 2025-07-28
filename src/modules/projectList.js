@@ -10,7 +10,8 @@ export default class ProjectList {
 
 
   getProject(title) {
-    this.projects.find(project => project.title === title);
+    const project = this.projects.find(project => project.title == title);
+    return project;
   }
 
   addProject(title) {
@@ -26,9 +27,5 @@ export default class ProjectList {
     if (projectIndex !== -1) {
       this.projects.splice(projectIndex, 1);
     }
-  }
-
-  updateTodayProject () {
-
   }
 }

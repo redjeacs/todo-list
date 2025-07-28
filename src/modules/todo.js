@@ -5,7 +5,7 @@ export default class ToDo {
     this._dueDate = dueDate;
     this._priority = priority;
     this.id = crypto.randomUUID();
-
+    this.completed = false;
   }
 
   get title() {
@@ -34,5 +34,9 @@ export default class ToDo {
   }
   set priority(newPriority) {
     this._priority = newPriority;
+  }
+
+  toggleComplete() {
+    this.completed = !this.completed;
   }
 }

@@ -6,10 +6,6 @@ export default class Project {
     this.projectId = crypto.randomUUID();
     this.toDoList = [];
   }
-
-  getTitle() {
-    return this.title;
-  }
   
   addToDo (title, description, dueDate, priority) {
     this.toDoList.push(new ToDo(title, description, dueDate, priority))
