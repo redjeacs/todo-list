@@ -1,3 +1,93 @@
+:root {
+  --granite-gray: rgb(103,103,103);
+  --alice-blue: rgb(240,248,255);
+}
+
 body {
-  background-color: rebeccapurple;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+/* Header */
+header {
+  display: flex;
+  background-color: var(--granite-gray);
+  justify-content: space-between;
+  padding: 20px;
+  color: whitesmoke;
+}
+
+.logo {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+}
+
+.page-title {
+  font-size: 38px;
+  font-weight: bold;
+  font-family: Merriweather;
+}
+
+.open-nav-btn {
+  display: flex;
+  background-color: var(--granite-gray);
+  border: none;
+  font-size: 40px;
+  width: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-icon {
+  width: 40px;
+  height: 40px;
+}
+
+
+/* Navigation */
+main {
+  display: flex;
+  min-height: calc(100vh - 87px);
+  font-family: Roboto, sans-serif;
+}
+
+.nav {
+  width: 300px;
+  min-width: 250px;
+  padding: 20px;
+  background-color: var(--alice-blue);
+}
+
+.default-project-btn {
+  text-align: left;
+}
+
+.projects-section {
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.add-project-btn {
+  text-align: left;
 }

@@ -3,12 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ToDo List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">  <title>ToDo List</title>
 </head>
 <body>
   <header>
-    <img src="./assets/to-do-list.png" alt="Logo Image">
-    <div>Todo List</div>
+    <div class="logo">
+      <img class="logo-img" src="./assets/to-do-list.png" alt="Logo Image">
+      <div class="page-title">Todo List</div>
+    </div>
+    <button class="open-nav-btn">
+      <img class="nav-icon" src="./assets/menu.png" alt="navigation icon">
+    </button>
   </header>
+  <main>
+    <nav class="nav">
+      <div class="default-projects">
+        <button class="default-project-btn">Inbox</button>
+        <button class="default-project-btn">Today</button>
+        <button class="default-project-btn">This week</button>
+      </div>
+      <div class="projects-section">Projects</div>
+      <button class="add-project-btn">Add Project</button>
+    </nav>
+    <div class="project-container"></div>
+  </main>
 </body>
 </html>
