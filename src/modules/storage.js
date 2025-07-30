@@ -17,10 +17,34 @@ function storageAvailable(type) {
   }
 }
 
-if (storageAvailable("localStorage")) {
-  // Yippee! We can use localStorage awesomeness
-  console.log('Storage Available!');
-} else {
-  // Too bad, no localStorage for us
-  console.log('Storage Unavailable!');
+function saveProjectList(projectList) {
+  if (storageAvailable('localStorage')) {
+    localStorage.setItem('projectList', JSON.stringify(projectList));
+  } else {
+    console.error('Local storage is not available');
+  }
 }
+
+function loadProjectList() {
+  if (storageAvailable('localStorage')) {
+    const projectListData = localStorage.getItem('projectList');
+    if (projectListData) {
+      return JSON.parse(projectListData);
+    } else {
+      return null;
+    }
+  } else {
+    console.error('Local storage is not available');
+    return null;
+  }
+}
+
+function clearProjectList() {
+  if (storageAvailable('localStorage')) {
+    localStorage.removeItem('projectList');
+  } else {
+    console.error('Local storage is not available');
+  }
+}
+
+export { saveProjectList, loadProjectList, clearProjectList };

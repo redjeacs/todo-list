@@ -28,4 +28,24 @@ export default class ProjectList {
       this.projects.splice(projectIndex, 1);
     }
   }
+
+  updateTodayProject() {
+    this.getProject('Today').todoList = [];
+    this.projects.forEach(project => {
+      if (project.title !== 'Today' && project.title !== 'This week') {
+        const todosToday = project.filterTodosToday();
+        this.getProject('Today').todoList.push(...todosToday);
+      }
+    });
+  }
+
+  updateThisWeekProject() {
+    this.getProject('This week').todoList = [];
+    this.projects.forEach(project => {
+      if (project.title !== 'Today' && project.title !== 'This week') {
+        const todosThisWeek = project.filterTodosThisWeek();
+        this.getProject('This week').todoList.push(...todosThisWeek);
+      }
+    });
+  }
 }
