@@ -90,4 +90,44 @@ main {
 
 .add-project-btn {
   text-align: left;
+  padding: 20px;
+}
+
+#project-form {
+  display: none;
+  padding: 10px;
+}
+
+#project-details-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#project-name {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+  border: 1px solid var(--granite-gray);
+}
+
+.project-form-btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.project-form-btns button {
+  border: 1px solid var(--granite-gray);
+}
+
+#submit-project-btn {
+  background-color: rgb(148, 245, 148);
+}
+
+#cancel-project-btn {
+  background-color: rgb(248, 185, 185);
 }
