@@ -1,3 +1,7 @@
+import Project from "./project";
+import ProjectList from "./projectList";
+import Todo from "./todo";
+
 function storageAvailable(type) {
   let storage;
   try {
@@ -17,34 +21,58 @@ function storageAvailable(type) {
   }
 }
 
-function saveProjectList(projectList) {
-  if (storageAvailable('localStorage')) {
-    localStorage.setItem('projectList', JSON.stringify(projectList));
-  } else {
-    console.error('Local storage is not available');
-  }
-}
-
-function loadProjectList() {
-  if (storageAvailable('localStorage')) {
-    const projectListData = localStorage.getItem('projectList');
-    if (projectListData) {
-      return JSON.parse(projectListData);
+export default class Storage {
+  static saveProjectList(projectList) {
+    if (storageAvailable('localStorage')) {
+      localStorage.setItem('projectList', JSON.stringify(projectList));
     } else {
+      console.error('Local storage is not available');
+    }
+  };
+
+  static loadProjectList() {
+    if (storageAvailable('localStorage')) {
+      const projectList = Object.assign(
+        new ProjectList(), 
+        JSON.parse(localStorage.getItem('projectList'))
+      );
+
+      projectList.projects = projectList.projects.map(project => Object.assign(new Project(), project));
+
+      projectList.projects.forEach(project => {
+        project = project.todoList.map(todo => Object.assign(new Todo(), todo));
+      });
+
+      return projectList;
+    } else {
+      console.error('Local storage is not available');
       return null;
     }
-  } else {
-    console.error('Local storage is not available');
-    return null;
-  }
-}
+  };
 
-function clearProjectList() {
-  if (storageAvailable('localStorage')) {
-    localStorage.removeItem('projectList');
-  } else {
-    console.error('Local storage is not available');
-  }
-}
+  static clearProjectList() {
+    if (storageAvailable('localStorage')) {
+      localStorage.removeItem('projectList');
+    } else {
+      console.error('Local storage is not available');
+    }
+  };
 
-export { saveProjectList, loadProjectList, clearProjectList };
+  static addProject(project) {
+    const projectList = Storage.loadProjectList();
+    projectList.addProject(project);
+    Storage.saveProjectList(projectList);
+  }
+
+  static removeItem(projectId) {
+    const projectList = Storage.loadProjectList();
+    projectList.removeProject(projectId);
+    Storage.saveProjectList(projectList);
+  }
+
+  static updateTodayProject() {
+    const projectList = Storage.loadProjectList();
+    projectList.updateTodayProject();
+    Storage.saveProjectList(projectList);
+  }
+};

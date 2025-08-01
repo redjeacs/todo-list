@@ -1,7 +1,8 @@
 import './styles.css';
 import ProjectList from './modules/projectList';
-import { saveProjectList, loadProjectList, clearProjectList } from './modules/storage';
+import Storage from './modules/storage';
 import Website from './modules/website';
+import Project from './modules/project';
 
 const test = new ProjectList();
 test.addProject('Todo Project');
@@ -10,5 +11,4 @@ test.getProject('Todo Project').addTodo('day 2', 'day 2 test', '2025-07-31', 'lo
 test.getProject('Todo Project').addTodo('day 4', 'day 5 test', '2025-07-30', 'medium');
 test.updateTodayProject();
 console.log(test);
-document.addEventListener('DOMContentLoaded', Website.initAddProjectBtn);
-
+document.addEventListener('DOMContentLoaded', Website.loadPage);

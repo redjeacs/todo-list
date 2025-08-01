@@ -8,6 +8,14 @@ export default class ProjectList {
     this.projects.push(new Project('This week'));
   }
 
+  set projects(newProjects) {
+    this._projects = newProjects;
+  }
+  
+  get projects() {
+    return this._projects;
+  }
+
 
   getProject(title) {
     const project = this.projects.find(project => project.title == title);

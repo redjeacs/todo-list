@@ -3,9 +3,41 @@ import { format, isToday, isThisWeek } from "date-fns";
 
 export default class Project {
   constructor (title) {
-    this.title = title;
+    this._title = title;
     this.projectId = crypto.randomUUID();
-    this.todoList = [];
+    this._todoList = [];
+  }
+
+  set todoList(newTodoList) {
+    this._todoList = newTodoList;
+  }
+
+  get todoList() {
+    return this._todoList;
+  }
+
+  set title(newTitle) {
+    this._title = newTitle;
+  }
+
+  get title() {
+    return this._title;
+  }
+
+  getTodoList() {
+    return this.todoList;
+  }
+
+  setTodoList(newTodoList) {
+    this.todoList = newTodoList;
+  }
+
+  set title(newTitle) {
+    this._title = newTitle;
+  }
+
+  get title() {
+    return this._title;
   }
   
   addTodo (title, description, dueDate, priority) {
