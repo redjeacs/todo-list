@@ -30,7 +30,7 @@ export default class Storage {
     }
   };
 
-  static loadProjectList() {
+  static getProjectList() {
     if (storageAvailable('localStorage')) {
       const projectList = Object.assign(
         new ProjectList(), 
@@ -58,20 +58,25 @@ export default class Storage {
     }
   };
 
+  static getProject(projectName) {
+    const projectList = Storage.getProjectList();
+    return projectList.getProject(projectName);
+  }
+
   static addProject(project) {
-    const projectList = Storage.loadProjectList();
+    const projectList = Storage.getProjectList();
     projectList.addProject(project);
     Storage.saveProjectList(projectList);
   }
 
-  static removeItem(projectId) {
-    const projectList = Storage.loadProjectList();
-    projectList.removeProject(projectId);
+  static removeProject(projectName) {
+    const projectList = Storage.getProjectList();
+    projectList.removeProject(projectName);
     Storage.saveProjectList(projectList);
   }
 
   static updateTodayProject() {
-    const projectList = Storage.loadProjectList();
+    const projectList = Storage.getProjectList();
     projectList.updateTodayProject();
     Storage.saveProjectList(projectList);
   }

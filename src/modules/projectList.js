@@ -30,8 +30,8 @@ export default class ProjectList {
     this.projects.push(new Project(title));
   }
 
-  removeProject(projectId) {
-    const projectIndex = this.projects.findIndex(project => project.projectId === projectId);
+  removeProject(projectName) {
+    const projectIndex = this.projects.findIndex(project => project.title === projectName);
     if (projectIndex !== -1) {
       this.projects.splice(projectIndex, 1);
     }

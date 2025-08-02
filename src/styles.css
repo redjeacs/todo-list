@@ -21,6 +21,11 @@ button {
   font-weight: inherit;
 }
 
+button:hover {
+  background-color: var(--granite-gray);
+  color: whitesmoke;
+}
+
 /* Header */
 header {
   display: flex;
@@ -130,4 +135,10 @@ main {
 
 #cancel-project-btn {
   background-color: rgb(248, 185, 185);
+}
+
+.project {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
