@@ -26,7 +26,12 @@ button:hover {
   color: whitesmoke;
 }
 
+i {
+  margin-right: 10px;
+}
+
 /* Header */
+
 header {
   display: flex;
   background-color: var(--granite-gray);
@@ -96,6 +101,7 @@ main {
 .add-project-btn {
   text-align: left;
   padding: 20px;
+  font-weight: bold;
 }
 
 #project-form {
@@ -141,4 +147,41 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
+}
+
+.project:hover {
+  background-color: var(--granite-gray);
+  color: whitesmoke;
+} 
+
+.project:hover .delete-project-btn {
+  display: block;
+}
+
+.project-btn {
+  text-align: left;
+}
+
+.delete-project-btn {
+  width: auto;
+  display: none;
+  color: whitesmoke;
+}
+
+/* Project Container */
+
+.project-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  width: 100%;
+  min-width: 250px;
+  padding: 20px;
+}
+
+.create-todo-btn {
+  width: auto;
+  padding: 10px 60px;
 }

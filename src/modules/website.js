@@ -50,7 +50,10 @@ export default class Website {
     newProject.classList.add('project', `${name.replace(/\s+/g, '-')}`);
     const newProjectBtn = document.createElement('button');
     newProjectBtn.classList.add('project-btn', `${name.replace(/\s+/g, '-')}`);
+    const projectIcon = document.createElement('i');
+    projectIcon.classList.add('fa-solid', 'fa-list-check');
     newProjectBtn.textContent = name;
+    newProjectBtn.prepend(projectIcon);
     const deleteProjectBtn = document.createElement('button');
     deleteProjectBtn.textContent = 'X';
     deleteProjectBtn.classList.add('delete-project-btn', `${name.replace(/\s+/g, '-')}`);

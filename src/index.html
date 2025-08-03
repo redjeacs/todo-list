@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/81e5ddd343.js" crossorigin="anonymous"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">  <title>ToDo List</title>
@@ -20,13 +21,13 @@
   <main>
     <nav class="nav">
       <div class="default-projects">
-        <button class="default-project-btn">Inbox</button>
-        <button class="default-project-btn">Today</button>
-        <button class="default-project-btn">This week</button>
+        <button class="default-project-btn"><i class="fa-solid fa-inbox"></i>Inbox</button>
+        <button class="default-project-btn"><i class="fa-solid fa-calendar-day"></i>Today</button>
+        <button class="default-project-btn"><i class="fa-solid fa-calendar-week"></i>This week</button>
       </div>
       <div class="projects-section">Projects</div>
       <div class="projects-container"></div>
-      <button class="add-project-btn">Add Project</button>
+      <button class="add-project-btn"><i class="fa-solid fa-plus"></i>Add Project</button>
       <div id="project-form">
         <form id="project-details-form">
             <input type="text" id="project-name" name="project-name" required>
@@ -39,7 +40,7 @@
     </nav>
     <div class="project-container">
       <div class="todos-container"></div>
-      <button class="create-todo-btn">Add Todo</button>
+      <button class="create-todo-btn"><i class="fa-solid fa-plus"></i>Add Todo</button>
     </div>
   </main>
 </body>
