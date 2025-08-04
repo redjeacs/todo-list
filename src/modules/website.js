@@ -47,9 +47,40 @@ export default class Website {
   static initiateAddTodoBtn() {
     const addTodoBtn = document.querySelector('.add-todo-btn');
     const todoModal = document.querySelector('#todo-modal');
+    const todoForm = document.querySelector('#todo-form')
+    const closeModalBtn = document.querySelector('.close-modal-btn');
+    const title = document.querySelector('#todo-title-input');
+    const description = document.querySelector('#todo-description-input');
+    const duedate = document.querySelector('#due-date-input');
+    const priority = document.querySelector('#priority-input');
+
+    function clearForm() {
+      title.value = '';
+      description.value = '';
+      duedate.value = '';
+      priority.value = 'Medium';
+    }
 
     addTodoBtn.addEventListener('click', () => {
       todoModal.showModal();
+    })
+
+    closeModalBtn.addEventListener('click', () => {
+      todoModal.close();
+      clearForm();
+    })
+
+    todoForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if(!duedate.value) {
+        const todayDate = format(new Date(), 'yyyy-MM-dd');
+        duedate.value = todayDate
+      }
+      Storage.addTodo(addTodoBtn.id, title.value, description.value, duedate.value, priority.value);
+      clearForm();
+      todoModal.close();
+      Website.loadProject(addTodoBtn.id);
+      console.log(Storage.getProjectList());
     })
   }
 
@@ -57,7 +88,7 @@ export default class Website {
     const projectBtns = document.querySelector(`.project-btn.${name.replace(/\s+/g, '-')}`);
     const deleteProjectBtns = document.querySelector(`.delete-project-btn.${name.replace(/\s+/g, '-')}`);
 
-    projectBtns.addEventListener('click', Website.loadProject);
+    projectBtns.addEventListener('click', Website.loadProject(name));
 
     function deleteProject(e) {
       console.log('delete project');
@@ -95,21 +126,42 @@ export default class Website {
     const todosContainer = document.querySelector('.todos-container');
     todosContainer.innerHTML = '';
     const currentProject = Storage.getProject(title);
+    const addTodobtn = document.querySelector('.add-todo-btn');
+
+    addTodobtn.id = title;
+
     currentProject.todoList.forEach(todo => {
       const todoItem = document.createElement('div');
       todoItem.classList.add('todo-item');
-      todoItem.classList.add(`${todo.priority}`);
+      todoItem.classList.add(`${todo._priority}`);
       const todoCompleteBtn = document.createElement('input');
       todoCompleteBtn.type = 'checkbox';
       todoCompleteBtn.classList.add('todo-complete-btn');
-      todoCompleteBtn.checked = todo.toggleComplete();
       const todoTitle = document.createElement('span');
-      todoTitle.textContent = todo.title;
+      todoTitle.classList.add('todo-title');
+      todoTitle.textContent = todo._title;
       const todoDueDate = document.createElement('span');
-      todoDueDate.textContent = format(new Date(todo.dueDate), 'MM/dd/yyyy');
+      todoDueDate.classList.add('todo-due-date')
+      todoDueDate.textContent = format(new Date(todo._dueDate), 'MM/dd/yyyy');
+      const editTodoBtn = document.createElement('button');
+      editTodoBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
       const deleteTodoBtn = document.createElement('button');
-      deleteTodoBtn.textContent = 'X';
+      deleteTodoBtn.innerHTML = '<i class="fa-solid fa-delete-left"></i>';
       deleteTodoBtn.classList.add('delete-todo-btn');
+
+      const todoLeft = document.createElement('div');
+      todoLeft.classList.add('todo-left');
+      const todoRight = document.createElement('div');
+      todoRight.classList.add('todo-right')
+
+      todoLeft.appendChild(todoCompleteBtn);
+      todoLeft.appendChild(todoTitle);
+      todoRight.appendChild(todoDueDate);
+      todoRight.appendChild(editTodoBtn);
+      todoRight.appendChild(deleteTodoBtn);
+      todoItem.appendChild(todoLeft);
+      todoItem.appendChild(todoRight);
+      todosContainer.appendChild(todoItem);
     });
   }
 
