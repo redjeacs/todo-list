@@ -7,6 +7,7 @@ export default class Website {
   static loadPage() {
     Storage.saveProjectList(new ProjectList());
     Website.initiateAddProjectBtn();
+    Website.initiateAddTodoBtn();
   }
 
   static initiateAddProjectBtn() {
@@ -17,7 +18,6 @@ export default class Website {
     const projectNameInput = document.getElementById('project-name');
 
     addProjectBtn.addEventListener('click', () => {
-      console.log('test');
       projectFormDiv.style.display = 'block';
       addProjectBtn.style.display = 'none';
     })
@@ -42,6 +42,34 @@ export default class Website {
       projectFormDiv.style.display = 'none';
       addProjectBtn.style.display = 'block';
     })
+  }
+
+  static initiateAddTodoBtn() {
+    const addTodoBtn = document.querySelector('.add-todo-btn');
+    const todoModal = document.querySelector('#todo-modal');
+
+    addTodoBtn.addEventListener('click', () => {
+      todoModal.showModal();
+    })
+  }
+
+  static initiateLoadProjectBtns(name) {
+    const projectBtns = document.querySelector(`.project-btn.${name.replace(/\s+/g, '-')}`);
+    const deleteProjectBtns = document.querySelector(`.delete-project-btn.${name.replace(/\s+/g, '-')}`);
+
+    projectBtns.addEventListener('click', Website.loadProject);
+
+    function deleteProject(e) {
+      console.log('delete project');
+      const projectName = e.target.parentElement.querySelector(`.project-btn.${name.replace(/\s+/g, '-')}`).textContent;
+      Storage.removeProject(projectName);
+      e.target.parentElement.remove();
+      if (document.querySelector('.todos-container')) {
+        document.querySelector('.todos-container').innerHTML = '';
+      }
+    }
+
+    deleteProjectBtns.addEventListener('click', deleteProject);
   }
 
   static createProject(name) {
@@ -85,23 +113,7 @@ export default class Website {
     });
   }
 
-  static initiateLoadProjectBtns(name) {
-    const projectBtns = document.querySelector(`.project-btn.${name.replace(/\s+/g, '-')}`);
-    const deleteProjectBtns = document.querySelector(`.delete-project-btn.${name.replace(/\s+/g, '-')}`);
+  
 
-    projectBtns.addEventListener('click', Website.loadProject);
-
-    function deleteProject(e) {
-      console.log('delete project');
-      const projectName = e.target.parentElement.querySelector(`.project-btn.${name.replace(/\s+/g, '-')}`).textContent;
-      Storage.removeProject(projectName);
-      e.target.parentElement.remove();
-      if (document.querySelector('.todos-container')) {
-        document.querySelector('.todos-container').innerHTML = '';
-      }
-    }
-
-    deleteProjectBtns.addEventListener('click', deleteProject);
-  }
 }
 

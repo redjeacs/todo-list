@@ -181,7 +181,68 @@ main {
   padding: 20px;
 }
 
-.create-todo-btn {
+.add-todo-btn {
   width: auto;
   padding: 10px 60px;
+}
+
+#todo-modal {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 900px;
+  padding: 0;
+}
+
+.modal-header {
+  border-bottom: 1px solid gray;
+  background-color: var(--granite-gray);
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  color: whitesmoke;
+}
+
+.close-modal-btn {
+  width: auto;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Merriweather, Arial;
+  color: whitesmoke;
+}
+
+.close-modal-btn:hover {
+  background-color: transparent;
+  color: inherit;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+#todo-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#todo-title, #todo-description, #due-date-label, #priority-label {
+  border: none;
+  padding: 10px;
+  max-width: 100%;
+  font-size: 20px;
+}
+
+#due-date-input, #priority-input {
+  font-size: 15px;
+  margin-left: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.submit-todo-btn {
+  width: 80%;
+  
+  align-self: center;
+  margin-bottom: 20px;
 }

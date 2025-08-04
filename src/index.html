@@ -40,7 +40,32 @@
     </nav>
     <div class="project-container">
       <div class="todos-container"></div>
-      <button class="create-todo-btn"><i class="fa-solid fa-plus"></i>Add Todo</button>
+      <button class="add-todo-btn"><i class="fa-solid fa-plus"></i>Add Todo</button>
+      <dialog id="todo-modal">
+        <div class="modal-header">
+            <h2 class="modal-title">New Todo</h2>
+            <button class="close-modal-btn">X</button>
+        </div>
+        <div class="modal-content">
+          <form id="todo-form">
+            <input type="text" id="todo-title" name="todo-title" placeholder="Title" required>
+            <textarea cols="40" rows="10" name="todo-description" id="todo-description" placeholder="Description"></textarea>
+            <label for="due-date-input" id="due-date-label">
+              Due Date: 
+              <input type="date" name="due-date-input" id="due-date-input">
+            </label>
+            <label for="priority-input" id="priority-label">
+              Priority: 
+              <select name="priority-input" id="priority-input">
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </label>
+          </form>
+        </div>
+        <button class="submit-todo-btn">Add Todo</button>
+      </dialog>
     </div>
   </main>
 </body>
