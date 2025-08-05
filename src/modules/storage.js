@@ -87,4 +87,14 @@ export default class Storage {
     projectList.updateTodayProject();
     Storage.saveProjectList(projectList);
   }
+
+  static updateThisWeekProject() {
+    const projectList = Storage.getProjectList();
+    projectList.updateThisWeekProject();
+    Storage.saveProjectList(projectList);
+  }
+
+  static updateInbox() {
+    const projectList = Storage.getProjectList();
+  }
 };

@@ -40,7 +40,7 @@ export default class ProjectList {
   updateTodayProject() {
     this.getProject('Today').todoList = [];
     this.projects.forEach(project => {
-      if (project.title !== 'Today' && project.title !== 'This week') {
+      if (project.title == 'Inbox') {
         const todosToday = project.filterTodosToday();
         this.getProject('Today').todoList.push(...todosToday);
       }
@@ -50,7 +50,7 @@ export default class ProjectList {
   updateThisWeekProject() {
     this.getProject('This week').todoList = [];
     this.projects.forEach(project => {
-      if (project.title !== 'Today' && project.title !== 'This week') {
+      if (project.title == 'Inbox') {
         const todosThisWeek = project.filterTodosThisWeek();
         this.getProject('This week').todoList.push(...todosThisWeek);
       }

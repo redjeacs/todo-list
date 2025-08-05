@@ -8,6 +8,8 @@ export default class Website {
     Storage.saveProjectList(new ProjectList());
     Website.initiateAddProjectBtn();
     Website.initiateAddTodoBtn();
+    Website.initiateDefaultProjectbtns();
+    Website.loadProject('Inbox');
   }
 
   static initiateAddProjectBtn() {
@@ -77,10 +79,12 @@ export default class Website {
         duedate.value = todayDate
       }
       Storage.addTodo(addTodoBtn.id, title.value, description.value, duedate.value, priority.value);
+      if(addTodoBtn.id !== 'Inbox') {
+        Storage.addTodo('Inbox', title.value, description.value, duedate.value, priority.value);
+      }
       clearForm();
       todoModal.close();
       Website.loadProject(addTodoBtn.id);
-      console.log(Storage.getProjectList());
     })
   }
 
@@ -88,10 +92,14 @@ export default class Website {
     const projectBtns = document.querySelector(`.project-btn.${name.replace(/\s+/g, '-')}`);
     const deleteProjectBtns = document.querySelector(`.delete-project-btn.${name.replace(/\s+/g, '-')}`);
 
-    projectBtns.addEventListener('click', Website.loadProject(name));
+    function loadProject(e) {
+      const projectName = e.target.parentElement.querySelector(`.project-btn.${name.replace(/\s+/g, '-')}`).textContent;
+      Website.loadProject(projectName);
+    }
+
+    projectBtns.addEventListener('click', loadProject);
 
     function deleteProject(e) {
-      console.log('delete project');
       const projectName = e.target.parentElement.querySelector(`.project-btn.${name.replace(/\s+/g, '-')}`).textContent;
       Storage.removeProject(projectName);
       e.target.parentElement.remove();
@@ -101,6 +109,22 @@ export default class Website {
     }
 
     deleteProjectBtns.addEventListener('click', deleteProject);
+  }
+
+  static initiateDefaultProjectbtns() {
+    const inboxProjectBtn = document.querySelector('.inbox');
+    const todayProjectBtn = document.querySelector('.today');
+    const thisWeekProjectBtn = document.querySelector('.this-week');
+
+    function loadProject(e) {
+      const projectName = e.target.textContent;
+      Website.loadProject(projectName);
+    }
+
+
+    inboxProjectBtn.addEventListener('click', loadProject);
+    todayProjectBtn.addEventListener('click', loadProject);
+    thisWeekProjectBtn.addEventListener('click', loadProject);
   }
 
   static createProject(name) {
@@ -123,12 +147,21 @@ export default class Website {
   }
 
   static loadProject(title) {
-    const todosContainer = document.querySelector('.todos-container');
+    if(title === 'Today') {
+      Storage.updateTodayProject();
+    }
+
+    if(title === 'This week') {
+      Storage.updateThisWeekProject();
+    }
+
+    let todosContainer = document.querySelector('.todos-container');
     todosContainer.innerHTML = '';
     const currentProject = Storage.getProject(title);
     const addTodobtn = document.querySelector('.add-todo-btn');
 
     addTodobtn.id = title;
+
 
     currentProject.todoList.forEach(todo => {
       const todoItem = document.createElement('div');

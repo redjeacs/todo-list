@@ -1,5 +1,5 @@
 import Todo from "./todo";
-import { format, isToday, isThisWeek } from "date-fns";
+import { toDate, format, isToday, isThisWeek } from "date-fns";
 
 export default class Project {
   constructor (title) {
@@ -53,14 +53,14 @@ export default class Project {
 
   filterTodosToday() {
     return this.todoList.filter((todo) => {
-      const dueDate = format((new Date(todo.dueDate)), 'MM/dd/yyyy');
+      const dueDate = new Date(todo._dueDate);
       return isToday(dueDate);
     })
   }
 
   filterTodosThisWeek() {
     return this.todoList.filter((todo) => {
-      const dueDate = format((new Date(todo.dueDate)), 'MM/dd/yyyy');
+      const dueDate = new Date(todo._dueDate);
       return isThisWeek(dueDate);
     })
   }
