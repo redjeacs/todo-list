@@ -44,8 +44,8 @@ export default class Project {
     this.todoList.push(new Todo(title, description, dueDate, priority))
   }
 
-  removeTodo (id) {
-    let todoIndex = this.todoList.findIndex(todo => todo.id === id);
+  removeTodo (title) {
+    let todoIndex = this.todoList.findIndex(todo => todo.title === title);
     if (todoIndex !== -1) {
       this.todoList.splice(todoIndex, 1);
     }

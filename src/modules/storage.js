@@ -82,6 +82,12 @@ export default class Storage {
     Storage.saveProjectList(projectList);
   }
 
+  static removeTodo(projectName, title) {
+    const projectList = Storage.getProjectList();
+    projectList.getProject(projectName).removeTodo(title);
+    Storage.saveProjectList(projectList);
+  }
+
   static updateTodayProject() {
     const projectList = Storage.getProjectList();
     projectList.updateTodayProject();
