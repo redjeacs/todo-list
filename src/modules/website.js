@@ -174,6 +174,7 @@ export default class Website {
 
     currentProject.todoList.forEach(todo => {
       const todoItem = document.createElement('div');
+      todoItem.id = todo._title;
       todoItem.classList.add('todo-item');
       todoItem.classList.add(`${todo._priority}`);
       const todoCompleteBtn = document.createElement('input');
@@ -204,6 +205,14 @@ export default class Website {
       todoItem.appendChild(todoLeft);
       todoItem.appendChild(todoRight);
       todosContainer.appendChild(todoItem);
+
+      deleteTodoBtn.addEventListener('click', (e) => {
+        const projectName = document.querySelector('#project-header').textContent;
+        const todoItem = e.target.parentElement.parentElement.parentElement;
+        const title = todoItem.id;
+        Storage.removeTodo(projectName, title);
+        this.loadProject(projectName);
+      })
     });
   }
 

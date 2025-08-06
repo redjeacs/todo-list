@@ -181,6 +181,14 @@ main {
   padding: 20px;
 }
 
+#project-header {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: Merriweather;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+}
+
 .add-todo-btn {
   width: auto;
   padding: 10px 60px;
