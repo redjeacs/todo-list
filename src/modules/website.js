@@ -6,6 +6,7 @@ import { de, tr } from 'date-fns/locale';
 export default class Website {
   static loadPage() {
     Storage.saveProjectList(new ProjectList());
+    Website.loadProject('Inbox');
     Website.initiateAddProjectBtn();
     Website.initiateAddTodoBtn();
     Website.initiateDefaultProjectbtns();
@@ -27,16 +28,19 @@ export default class Website {
     projectDetailsForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const projectName = projectNameInput.value;
-      if (projectName) {
-        Storage.addProject(projectName);
-        Website.createProject(projectName);
-        projectFormDiv.style.display = 'none';
-        addProjectBtn.style.display = 'block';
-        projectNameInput.value = '';
+      if(Storage.getProjectList().hasProject(projectName)) {
+        alert('Project already exists');
+        return
       }
-      else {
+      if(projectName === '') {
         alert('Please enter a project name');
+        return
       }
+      Storage.addProject(projectName);
+      Website.createProject(projectName);
+      projectFormDiv.style.display = 'none';
+      addProjectBtn.style.display = 'block';
+      projectNameInput.value = '';
     })
 
     cancelProjectBtn.addEventListener('click', () => {
@@ -73,18 +77,22 @@ export default class Website {
     })
 
     todoForm.addEventListener('submit', (e) => {
+      const projectName = document.querySelector('#project-header');
       e.preventDefault();
       if(!duedate.value) {
         const todayDate = format(new Date(), 'yyyy-MM-dd');
         duedate.value = todayDate
       }
-      Storage.addTodo(addTodoBtn.id, title.value, description.value, duedate.value, priority.value);
-      if(addTodoBtn.id !== 'Inbox') {
-        Storage.addTodo('Inbox', title.value, description.value, duedate.value, priority.value);
+      if(Storage.getProject('Inbox').hasTodo(title.value)) {
+        alert('Todo already exists!');
+        return
       }
+
+      Storage.addTodo(projectName.textContent, title.value, description.value, duedate.value, priority.value);
+
       clearForm();
       todoModal.close();
-      Website.loadProject(addTodoBtn.id);
+      Website.loadProject(projectName.textContent);
     })
   }
 
@@ -93,7 +101,7 @@ export default class Website {
     const deleteProjectBtns = document.querySelector(`.delete-project-btn.${name.replace(/\s+/g, '-')}`);
 
     function loadProject(e) {
-      const projectName = e.target.parentElement.querySelector(`.project-btn.${name.replace(/\s+/g, '-')}`).textContent;
+      const projectName = e.target.textContent;
       Website.loadProject(projectName);
     }
 
@@ -158,9 +166,10 @@ export default class Website {
     let todosContainer = document.querySelector('.todos-container');
     todosContainer.innerHTML = '';
     const currentProject = Storage.getProject(title);
-    const addTodobtn = document.querySelector('.add-todo-btn');
-
-    addTodobtn.id = title;
+    const projectName = document.createElement('div');
+    projectName.id = 'project-header';
+    projectName.textContent = title;
+    todosContainer.appendChild(projectName);
 
 
     currentProject.todoList.forEach(todo => {

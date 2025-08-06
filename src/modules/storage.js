@@ -70,7 +70,13 @@ export default class Storage {
   }
 
   static removeProject(projectName) {
-    const projectList = Storage.getProjectList();
+    let projectList = Storage.getProjectList();
+    const projectTodoList = projectList.getProject(projectName).todoList;
+    projectTodoList.forEach(todo => {
+      console.log(todo._title);
+      Storage.removeTodo(projectName, todo._title);
+    })
+    projectList = Storage.getProjectList();
     projectList.removeProject(projectName);
     Storage.saveProjectList(projectList);
   }
@@ -78,6 +84,9 @@ export default class Storage {
   static addTodo(projectName, title, description, duedate, priority) {
     const projectList = Storage.getProjectList();
     projectList.getProject(projectName).addTodo(title, description, duedate, priority);
+    if(projectName !== 'Inbox') {
+      projectList.getProject('Inbox').addTodo(title, description, duedate, priority);
+    }
     Storage.clearProjectList();
     Storage.saveProjectList(projectList);
   }
@@ -85,6 +94,15 @@ export default class Storage {
   static removeTodo(projectName, title) {
     const projectList = Storage.getProjectList();
     projectList.getProject(projectName).removeTodo(title);
+    if(projectName !== 'Inbox') {
+      projectList.getProject('Inbox').removeTodo(title);
+    }
+    Storage.saveProjectList(projectList);
+  }
+
+  static clearTodoList(projectName) {
+    const projectList = Storage.getProjectList();
+    projectList.getProject(projectName).removeAllTodos();
     Storage.saveProjectList(projectList);
   }
 
@@ -98,9 +116,5 @@ export default class Storage {
     const projectList = Storage.getProjectList();
     projectList.updateThisWeekProject();
     Storage.saveProjectList(projectList);
-  }
-
-  static updateInbox() {
-    const projectList = Storage.getProjectList();
   }
 };

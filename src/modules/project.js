@@ -39,13 +39,17 @@ export default class Project {
   get title() {
     return this._title;
   }
+
+  hasTodo(todoTitle) {
+    return this._todoList.some(todo => todo._title === todoTitle);
+  }
   
   addTodo (title, description, dueDate, priority) {
     this.todoList.push(new Todo(title, description, dueDate, priority))
   }
 
   removeTodo (title) {
-    let todoIndex = this.todoList.findIndex(todo => todo.title === title);
+    let todoIndex = this.todoList.findIndex(todo => todo._title === title);
     if (todoIndex !== -1) {
       this.todoList.splice(todoIndex, 1);
     }

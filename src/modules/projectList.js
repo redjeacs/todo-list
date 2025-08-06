@@ -16,6 +16,10 @@ export default class ProjectList {
     return this._projects;
   }
 
+  hasProject(projectTitle) {
+    return this.projects.some(project => project.title === projectTitle);
+  }
+
 
   getProject(title) {
     const project = this.projects.find(project => project.title == title);
