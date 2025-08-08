@@ -1,73 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/81e5ddd343.js" crossorigin="anonymous"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">  <title>ToDo List</title>
-</head>
-<body>
-  <header>
-    <div class="logo">
-      <img class="logo-img" src="./assets/to-do-list.png" alt="Logo Image">
-      <div class="page-title">Todo List</div>
-    </div>
-    <button class="open-nav-btn">
-      <img class="nav-icon" src="./assets/menu.png" alt="navigation icon">
-    </button>
-  </header>
-  <main>
-    <nav class="nav">
-      <div class="default-projects">
-        <button class="default-project-btn inbox"><i class="fa-solid fa-inbox"></i>Inbox</button>
-        <button class="default-project-btn today"><i class="fa-solid fa-calendar-day"></i>Today</button>
-        <button class="default-project-btn this-week"><i class="fa-solid fa-calendar-week"></i>This week</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/81e5ddd343.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>ToDo List</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img class="logo-img" src="./assets/to-do-list.png" alt="Logo Image" />
+        <div class="page-title">Todo List</div>
       </div>
-      <div class="projects-section">Projects</div>
-      <div class="projects-container"></div>
-      <button class="add-project-btn"><i class="fa-solid fa-plus"></i>Add Project</button>
-      <div id="project-form">
-        <form id="project-details-form">
-            <input type="text" id="project-name" name="project-name" required>
+      <button class="open-nav-btn">
+        <img class="nav-icon" src="./assets/menu.png" alt="navigation icon" />
+      </button>
+    </header>
+    <main>
+      <nav class="nav">
+        <div class="default-projects">
+          <button class="default-project-btn" id="inbox">
+            <i class="fa-solid fa-inbox"></i>Inbox
+          </button>
+          <button class="default-project-btn" id="today">
+            <i class="fa-solid fa-calendar-day"></i>Today
+          </button>
+          <button class="default-project-btn" id="this-week">
+            <i class="fa-solid fa-calendar-week"></i>This week
+          </button>
+        </div>
+        <div class="projects-section">Projects</div>
+        <div class="projects-container"></div>
+        <button class="add-project-btn">
+          <i class="fa-solid fa-plus"></i>Add Project
+        </button>
+        <div id="project-form">
+          <form id="project-details-form">
+            <input type="text" id="project-name" name="project-name" required />
             <div class="project-form-btns">
               <button type="submit" id="submit-project-btn">Add</button>
               <button type="button" id="cancel-project-btn">Cancel</button>
             </div>
-        </form>
-    </div>
-    </nav>
-    <div class="project-container">
-      <div class="todos-container"></div>
-      <button class="add-todo-btn"><i class="fa-solid fa-plus"></i>Add Todo</button>
+          </form>
+        </div>
+      </nav>
+      <div class="project-container">
+        <div class="todos-container"></div>
+        <button class="add-todo-btn">
+          <i class="fa-solid fa-plus"></i>Add Todo
+        </button>
+      </div>
       <dialog id="todo-modal">
         <div class="modal-header">
-            <h2 class="modal-title">New Todo</h2>
-            <button class="close-modal-btn">X</button>
+          <h2 class="modal-title">New Todo</h2>
+          <button class="close-modal-btn">X</button>
         </div>
         <div class="modal-content">
           <form id="todo-form">
-            <input type="text" id="todo-title-input" name="todo-title-input" placeholder="Title" required>
-            <textarea cols="40" rows="10" name="todo-description-input" id="todo-description-input" placeholder="Description"></textarea>
+            <input
+              type="text"
+              id="todo-title-input"
+              name="todo-title-input"
+              placeholder="Title"
+              required
+            />
+            <textarea
+              cols="40"
+              rows="10"
+              name="todo-description-input"
+              id="todo-description-input"
+              placeholder="Description"
+            ></textarea>
             <label for="due-date-input" id="due-date-label">
-              Due Date: 
-              <input type="date" name="due-date-input" id="due-date-input">
+              Due Date:
+              <input type="date" name="due-date-input" id="due-date-input" />
             </label>
             <label for="priority-input" id="priority-label">
-              Priority: 
+              Priority:
               <select name="priority-input" id="priority-input">
                 <option value="High">High</option>
                 <option value="Medium" selected>Medium</option>
                 <option value="Low">Low</option>
               </select>
             </label>
-            <div class="submit-modal"><button type="submit" class="submit-todo-btn">Add Todo</button></div>
+            <div class="submit-modal">
+              <button type="submit" class="submit-todo-btn">Add Todo</button>
+            </div>
           </form>
         </div>
-        
       </dialog>
-    </div>
-  </main>
-</body>
+    </main>
+  </body>
 </html>
